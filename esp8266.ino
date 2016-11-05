@@ -6,32 +6,26 @@
 #define SENSOR_PIN A0   // Sensor pin number
 
 // WiFi
-char* WIFI_SSID = "ieeehotspot";
-char* WIFI_PASSWORD = "Jk638td9og35";
+/*char* WIFI_SSID = "ieeehotspot";
+  char* WIFI_PASSWORD = "Jk638td9og35";*/
+char* WIFI_SSID = "Vodafone-F543D9";
+char* WIFI_PASSWORD = "038E3744D1";
 
 int TEMP_MAX = 22;
 int TEMP_MIN = 30;
 
 ESP8266WebServer server(80);  // Define port 80 for the web server port
 
-OneWire oneWire(WARNING_PIN); // Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(SENSOR_PIN); // Setup a oneWire instance to communicate with any OneWire devices
 
 DallasTemperature sensors(&oneWire);  // Pass our oneWire reference to Dallas Temperature.
 
+int temp;
+
 void respond() {
-  int temp;
-  sensors.requestTemperatures(); // Send the command to get temperatures
-  char response[50];  // variable to hold the data to send
-  sprintf(response, "%d", sensors.getTempCByIndex(0));  // Convert data to string (char*)
-  
-  server.send(200, "text/plain", response); // Send data as response
-  
-  temp = sensors.getTempCByIndex(0);        // Gets the current temperature
-  if (temp > TEMP_MAX || temp < TEMP_MIN) { //Checks if the temperature is within the defined limits
-    digitalWrite(WARNING_PIN, HIGH);  // If the temperature is out of limits lights up the warning led
-  } else {
-    digitalWrite(WARNING_PIN, LOW);   // If the temperature is within the limits turns off the warning led
-  }
+  char data[10]; // variable to hold the temperature as string
+  sprintf(data, "%d", sensors.getTempCByIndex(0));  // Convert data to string (char*)
+  server.send(200, "text/plain", data); // Send data as response
 }
 
 void setup() {
@@ -48,4 +42,13 @@ void setup() {
 
 void loop() {
   server.handleClient();  // Makes sure to reconnect if wifi fails and other stuff
+
+  sensors.requestTemperatures(); // Send the command to get temperatures
+
+  temp = sensors.getTempCByIndex(0);        // Gets the current temperature
+  if (temp > TEMP_MAX || temp < TEMP_MIN) { //Checks if the temperature is within the defined limits
+    digitalWrite(WARNING_PIN, HIGH);  // If the temperature is out of limits lights up the warning led
+  } else {
+    digitalWrite(WARNING_PIN, LOW);   // If the temperature is within the limits turns off the warning led
+  }
 }
