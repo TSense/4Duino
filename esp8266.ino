@@ -2,6 +2,8 @@
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
+#define UNIQUE_ID 00001 // Number to differenciate measure points
+
 #define WARNING_PIN D0  // Led pin number
 #define SENSOR_PIN A0   // Sensor pin number
 
@@ -24,7 +26,7 @@ int temp;
 
 void respond() {
   char data[10]; // variable to hold the temperature as string
-  sprintf(data, "%d", sensors.getTempCByIndex(0));  // Convert data to string (char*)
+  sprintf(data, "%d,%d", UNIQUE_ID, sensors.getTempCByIndex(0));  // Arranges data in a coma separated string for easy data extraction
   server.send(200, "text/plain", data); // Send data as response
 }
 
