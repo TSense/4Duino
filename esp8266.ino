@@ -26,7 +26,7 @@ int temp;
 
 void respond() {
   char data[10]; // variable to hold the temperature as string
-  sprintf(data, "%d,%d", UNIQUE_ID, temp);  // Arranges data in a coma separated string for easy data extraction
+  sprintf(data, "%d;%d", UNIQUE_ID, temp);  // Arranges data in a coma separated string for easy data extraction
   server.send(200, "text/plain", data); // Send data as response
 }
 
