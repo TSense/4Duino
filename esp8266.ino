@@ -9,10 +9,8 @@
 #define ONE_WIRE_BUS A0   // Sensor pin number
 
 // WiFi
-/*char* WIFI_SSID = "ieeehotspot";
-  char* WIFI_PASSWORD = "Jk638td9og35";*/
-char* WIFI_SSID = "Vodafone-F543D9";
-char* WIFI_PASSWORD = "038E3744D1";
+char* WIFI_SSID = "ieeehotspot";
+char* WIFI_PASSWORD = "Jk638td9og35";
 
 int TEMP_MAX = 22;
 int TEMP_MIN = 30;
