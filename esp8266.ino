@@ -18,7 +18,7 @@ int TEMP_MIN = 30;
 
 ESP8266WebServer server(80);  // Define port 80 for the web server port
 
-OneWire oneWire(SENSOR_PIN); // Setup a oneWire instance to communicate with any OneWire devices
+OneWire oneWire(ONE_WIRE_BUS); // Setup a oneWire instance to communicate with any OneWire devices
 
 DallasTemperature sensors(&oneWire);  // Pass our oneWire reference to Dallas Temperature.
 
@@ -26,7 +26,7 @@ int temp;
 
 void respond() {
   char data[10]; // variable to hold the temperature as string
-  sprintf(data, "%d,%d", UNIQUE_ID, sensors.getTempCByIndex(0));  // Arranges data in a coma separated string for easy data extraction
+  sprintf(data, "%d,%d", UNIQUE_ID, temp);  // Arranges data in a coma separated string for easy data extraction
   server.send(200, "text/plain", data); // Send data as response
 }
 
@@ -43,7 +43,7 @@ void setup() {
 }
 
 void loop() {
-  server.handleClient();  // Makes sure to reconnect if wifi fails and other stuff
+  server.handleClient();  // Makes sure to reconnect if wifi fails
 
   sensors.requestTemperatures(); // Send the command to get temperatures
 
