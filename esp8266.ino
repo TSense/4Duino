@@ -1,4 +1,5 @@
-#include "MyWifi.h"
+#include <ESP8266WiFi.h>
+#include <ESP8266WebServer.h>
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
@@ -32,7 +33,11 @@ void respond() {
 
 void setup() {
   Serial.begin(115200); // Initializes serial with baud rate as a parameter
-  connectWifi(WIFI_SSID, WIFI_PASSWORD); // Tries to connect to a wifi network with credentials as parameters
+  int i = 0;
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD); // Sets Wifi credentials
+  while (WiFi.status()  !=  WL_CONNECTED) { // Try to connect until it does
+    delay(100);
+  }
   Serial.println("");
   Serial.println(WiFi.localIP());   // Prints internal IP on serial TODO: Make it print on the LCD
   pinMode(ONE_WIRE_BUS, INPUT);       // Defines sensor pin as being an input
