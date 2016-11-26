@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "";
-const char* password = "";
+const char* ssid = "Vodafone-F543D9";
+const char* password = "038E3744D1";
 
 WiFiServer server(80); // Create an instance of the server and specify the port to listen on as an argument
 
@@ -55,9 +55,11 @@ void loop() {
   String s = WiFi.macAddress();
   s += ";";
   const int sensorPin = 5;
-  float temp; //TODO: Ler temperatura e humidade
-  float hum;
+  float temp = (rand()%25)+15; //TODO: Ler temperatura e humidade
+  float hum = rand()%100;
   s += temp;
+  s += ";";
+  s += hum;
 
   client.print(s); // Send the response to the client
   delay(1);
