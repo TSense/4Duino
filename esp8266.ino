@@ -3,7 +3,7 @@
 const char* ssid = "Vodafone-F543D9";
 const char* password = "038E3744D1";
 
-WiFiServer server(80); // Create an instance of the server and specify the port to listen on as an argument
+WiFiServer server(7568); // Create an instance of the server and specify the port to listen on as an argument
 
 void setup() {
   Serial.begin(115200);
