@@ -1,9 +1,8 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "Vodafone-F543D9";
-const char* password = "038E3744D1";
-
 WiFiServer server(7568); // Create an instance of the server and specify the port to listen on as an argument
+const char* ssid = "ieeehotspot";
+const char* password = "Jk638td9og35";
 
 void setup() {
   Serial.begin(115200);
@@ -15,10 +14,9 @@ void setup() {
     delay(500);
     Serial.print(".");
   }
-  
+
   server.begin(); // Start the server
-  
-  Serial.println(""); 
+
   Serial.println(WiFi.localIP()); //TODO: Make it print on the lcd
 }
 
@@ -30,10 +28,7 @@ void loop() {
   }
 
   Serial.println("new client");
-  while (!client.available()) { // Wait until the client sends some data
-    delay(1);
-  }
-
+  String s = "";
   // Read the first line of the request
   String req = client.readStringUntil('\r');
   // HTTP 1.1 GET /temp
@@ -49,22 +44,14 @@ void loop() {
     return;
   }
 
-  client.flush();
-
-  // Prepare the response
-  String s = WiFi.macAddress();
+  client.flush();*/
+  s += WiFi.macAddress();
   s += ";";
-  const int sensorPin = 5;
-  float temp = (rand()%25)+15; //TODO: Ler temperatura e humidade
-  float hum = rand()%100;
+  float temp = (rand() % 25) + 15; //TODO: Ler temperatura e humidade
+  float hum = rand() % 100;
   s += temp;
   s += ";";
   s += hum;
-
-  client.print(s); // Send the response to the client
-  delay(1);
-  Serial.println("Client disconnected");
-
-  // The client will actually be disconnected
-  // when the function returns and 'client' object is detroyed
+  Serial.println("Response Sent");
+  client.print(s);
 }
