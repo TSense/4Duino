@@ -36,7 +36,7 @@ void loop() {
   // Accept-enco
   Serial.println(req);
   client.flush();
-
+/*
   if (req.indexOf("/temp") == -1) // Match the request
   {
     Serial.println("invalid request");
@@ -44,7 +44,7 @@ void loop() {
     return;
   }
 
-  client.flush();
+  client.flush();*/
   s += WiFi.macAddress();
   s += ";";
   float temp = (rand() % 25) + 15; //TODO: Ler temperatura e humidade
