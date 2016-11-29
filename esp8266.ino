@@ -44,7 +44,7 @@ void loop() {
     return;
   }
 
-  client.flush();*/
+  client.flush();
   s += WiFi.macAddress();
   s += ";";
   float temp = (rand() % 25) + 15; //TODO: Ler temperatura e humidade
