@@ -18,6 +18,10 @@ void respond() {
   server.send(200, "text/html", s); // Send data as response
 }
 
+void configPage(){
+  server.send(200, "text/html", "TSense Configuration Page");
+}
+
 void setup() {
   Serial.begin(115200); // Initializes serial with baud rate as a parameter
   int i = 0;
@@ -28,6 +32,7 @@ void setup() {
   Serial.println("");
   Serial.println(WiFi.localIP());   // Prints internal IP on serial TODO: Make it print on the LCD
   server.on("/temp", respond);          // Listen for HTTP/GET requests to respond appropriately
+  server.on("/", configPage);
   server.begin();                   // Start web server
 }
 
