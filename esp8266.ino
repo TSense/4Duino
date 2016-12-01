@@ -100,8 +100,8 @@ void setup()
     delay(10);
   }
   Serial.println(WiFi.localIP()); // Prints internal IP on serial TODO: Make it print on the LCD
-  server.on("/", respond);    // Listen for HTTP/GET requests to respond appropriately
-  server.begin(); // Start web server
+  server.on("/", respond);        // Listen for HTTP/GET requests to respond appropriately
+  server.begin();                 // Start web server
 }
 
 void loop()
