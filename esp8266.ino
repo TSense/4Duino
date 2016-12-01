@@ -32,11 +32,6 @@ void respond()
   server.send(200, "text/html", s); // Send data as response
 }
 
-void configPage()
-{
-  server.send(200, "text/html", "<h1>TSense Configuration Page</h1>");
-}
-
 void setup()
 {
   //***Driver settings********************************//
@@ -105,8 +100,7 @@ void setup()
     delay(10);
   }
   Serial.println(WiFi.localIP()); // Prints internal IP on serial TODO: Make it print on the LCD
-  server.on("/temp", respond);    // Listen for HTTP/GET requests to respond appropriately
-  server.on("/", configPage);
+  server.on("/", respond);    // Listen for HTTP/GET requests to respond appropriately
   server.begin(); // Start web server
 }
 
