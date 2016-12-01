@@ -7,9 +7,9 @@
 char *ssid = "ieeehotspot";
 char *password = "Jk638td9og35";
 
-int temp = 20;
-int tempLow = 10;
-int tempHigh = 30;
+float temp = 20;
+float tempLow = 10;
+float tempHigh = 30;
 
 BME280 tempSensor;
 
