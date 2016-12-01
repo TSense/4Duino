@@ -1,4 +1,4 @@
-# ESP8266
+# 4Duino
 This is the script that runs on the temperature sensor
 
-![ESP8266](http://files.linuxgizmos.com/4dsystems_4duino24_gui.jpg)
+![4Duino](http://files.linuxgizmos.com/4dsystems_4duino24_gui.jpg)
