@@ -7,6 +7,7 @@
 char *ssid = "ieeehotspot";
 char *password = "Jk638td9og35";
 
+float hum = 0;
 float temp = 20;
 float tempLow = 10;
 float tempHigh = 30;
@@ -17,8 +18,10 @@ ESP8266WebServer server(7568); // Define port 80 for the web server port
 
 void respond()
 {
-  tempLow = server.arg("templow");
-  tempHigh = server.arg("temphigh");
+  String str_tempLow = server.arg("templow");
+  String str_tempHigh = server.arg("temphigh");
+  tempLow = str_tempLow.toFloat();
+  tempHigh = str_tempHigh.toFloat();
   String s = "";
   s += WiFi.macAddress();
   s += ";";
@@ -92,9 +95,9 @@ void setup()
   tempSensor.settings.humidOverSample = 16;
 
   Serial.begin(115200); // Initializes serial with baud rate as a parameter
-                        //Calling .begin() causes the settings to be loaded
-  delay(10);            //Make sure sensor had enough time to turn on. BME280 requires 2ms to start up.
-  Serial.println(mySensor.begin(), HEX);
+  //Calling .begin() causes the settings to be loaded
+  delay(10); //Make sure sensor had enough time to turn on. BME280 requires 2ms to start up.
+  Serial.println(tempSensor.begin(), HEX);
 
   WiFi.begin(ssid, password); // Sets Wifi credentials
   while (WiFi.status() != WL_CONNECTED)
