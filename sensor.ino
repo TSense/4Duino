@@ -1,15 +1,21 @@
+//
+// NB! This is a file generated from the .4Dino file, changes will be lost
+//     the next time the .4Dino file is built
+//
 // Define LOG_MESSAGES to a serial port to send SPE errors messages to. Do not use the same Serial port as SPE
 #define LOG_MESSAGES Serial
 
-%%Display%%.DefineResetLine ;      // *Replaced* at compile time with define for reset line connected to the display
-%%Display%%.DefineDisplaySerialx ; // *Replaced* at compile time with define the Serial Port connected to the display
+#define RESETLINE     30
+
+#define DisplaySerial Serial1
+
 
 #include "sensorConst.h"
 
-%%Display%%.IncludeSerial_4DLib ;          // *Replaced* at compile time with an Include the Serial Library relevant to the display
-%%Display%%.IncludeSerial_Const4D ;        // *Replaced* at compile time with an Include the Constants file relevant to the display
+#include "Picaso_Serial_4DLib.h"
+#include "Picaso_Const4D.h"
 
-%%Display%%.AssignDisplaySerialtoLibrary ; // *Replaced* at compile time with an Assign of the correct Serial port to the correct library
+Picaso_Serial_4DLib Display(&DisplaySerial);
 
 #define ESPRESET 17
 #include <SoftwareSerial.h>
@@ -94,9 +100,9 @@ Serial.begin(115200) ;        // serial to USB port
 while (!Serial) ;             // wait for serial to be established
 
   pinMode(RESETLINE, OUTPUT);       // Display reset pin
-  %%Display%%.Toggle_Reset_On ;       // *Replaced* at compile time with correct rest on logic for the attached display
+  digitalWrite(RESETLINE, 1);       // Reset Display, using shield
   delay(100);                       // wait for it to be recognised
-  %%Display%%.Toggle_Reset_Off ;      // *Replaced* at compile time with correct rest off logic for the attached display
+  digitalWrite(RESETLINE, 0);       // Release Display Reset, using shield
 // Uncomment when using ESP8266
   pinMode(ESPRESET, OUTPUT);        // ESP reset pin
   digitalWrite(ESPRESET, 1);        // Reset ESP
@@ -105,7 +111,7 @@ while (!Serial) ;             // wait for serial to be established
   delay(3000) ;                     // give display time to startup
 
   // now start display as Serial lines should have 'stabilised'
-  %%Display%%.DisplaySerial.Begin_Speed ; // *Replaced* at compile time with command to start the serial port at the correct speed
+  DisplaySerial.begin(200000) ;     // Hardware serial to Display, same as SPE on display is set to
   Display.TimeLimit4D = 5000 ;      // 5 second timeout on all commands
   Display.Callback4D = mycallback ;
 
