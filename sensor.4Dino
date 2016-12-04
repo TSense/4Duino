@@ -4,7 +4,7 @@
 %%Display%%.DefineResetLine ;      // *Replaced* at compile time with define for reset line connected to the display
 %%Display%%.DefineDisplaySerialx ; // *Replaced* at compile time with define the Serial Port connected to the display
 
-#include "lcdConst.h"
+#include "sensorConst.h"
 
 %%Display%%.IncludeSerial_4DLib ;          // *Replaced* at compile time with an Include the Serial Library relevant to the display
 %%Display%%.IncludeSerial_Const4D ;        // *Replaced* at compile time with an Include the Constants file relevant to the display
@@ -131,8 +131,8 @@ while (!Serial) ;             // wait for serial to be established
     }
   }
 //hFontn = Display.file_LoadImageControl("NoName1.dnn", "NoName1.gnn", 1); // Open handle to access uSD fonts, uncomment if required and change nn to font number
-//hstrings = Display.file_Open("lcd.txf", 'r') ;                            // Open handle to access uSD strings, uncomment if required
-  hndl = Display.file_LoadImageControl("lcd.dat", "lcd.gci", 1);
+//hstrings = Display.file_Open("sensor.txf", 'r') ;                            // Open handle to access uSD strings, uncomment if required
+  hndl = Display.file_LoadImageControl("sensor.dat", "sensor.gci", 1);
   // put your setup code here, to run once:
   //***Driver settings********************************//
   //commInterface can be I2C_MODE or SPI_MODE
