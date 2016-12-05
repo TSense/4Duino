@@ -30,7 +30,9 @@ ESP8266 wifi(SerialS,19200);
 
 #define SSID "ieeehotspot"
 #define PASS "Jk638td9og35"
+#define rpi_ip "192.168.1.75";
 
+float hum = 50;
 float humLow = 0;
 float humHigh = 100;
 float temp = 20;
@@ -59,6 +61,10 @@ void respond()
   s += hum;
   s += ";";
   server.send(200, "text/html", s); // Send data as response
+}
+
+void ota(){
+    ESPhttpUpdate.update(rpi_ip, 3000, "/ota");
 }
 
 // routine to handle Serial errors
@@ -207,6 +213,7 @@ while (!Serial) ;             // wait for serial to be established
   }
   Serial.println(WiFi.localIP()); // Prints internal IP on serial TODO: Make it print on the LCD
   server.on("/", respond);        // Listen for HTTP/GET requests to respond appropriately
+  server.on("/upgrade", ota);
   server.begin();                 // Start web server
 } // end Setup **do not alter, remove or duplicate this line**
 
