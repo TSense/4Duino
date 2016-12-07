@@ -32,3 +32,200 @@ Form
     OnTouchPressed               ''
     OnTouchReleased              ''
 end
+StaticText
+    Name                         Statictext1
+    Alias                        lbl_temp
+    AutoSize                     Yes
+    Caption                      23.88ºC
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    72
+    Font.Style                   []
+    Height                       100
+    Left                         40
+    Top                          40
+    Transparent                  Yes
+    Width                        269
+    WordWrap                     Yes
+end
+StaticText
+    Name                         Statictext2
+    Alias                        lbl_hum
+    AutoSize                     No
+    Caption                      87.28%
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    72
+    Font.Style                   []
+    Height                       96
+    Left                         40
+    Top                          140
+    Transparent                  Yes
+    Width                        248
+    WordWrap                     Yes
+end
+Circle
+    Name                         Circle1
+    Alias                        status
+    Color                        LIME
+    Filled                       Yes
+    Rad                          10
+    X                            15
+    Y                            225
+end
+StaticText
+    Name                         Statictext3
+    Alias                        mac1
+    AutoSize                     Yes
+    Caption                      CF
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    18
+    Font.Style                   []
+    Height                       25
+    Left                         6
+    Top                          40
+    Transparent                  Yes
+    Width                        20
+    WordWrap                     Yes
+end
+StaticText
+    Name                         Statictext4
+    Alias                        Statictext4
+    AutoSize                     Yes
+    Caption                      9B
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    18
+    Font.Style                   []
+    Height                       25
+    Left                         6
+    Top                          64
+    Transparent                  Yes
+    Width                        22
+    WordWrap                     Yes
+end
+Rectangle
+    Name                         Rectangle1
+    Alias                        Rectangle1
+    Color                        BLACK
+    Filled                       Yes
+    Height                       100
+    Left                         32
+    Outlined                     Yes
+    OutlineColor                 WHITE
+    Pattern                      Solid
+    Top                          40
+    Width                        290
+end
+Rectangle
+    Name                         Rectangle2
+    Alias                        Rectangle2
+    Color                        BLACK
+    Filled                       Yes
+    Height                       100
+    Left                         32
+    Outlined                     Yes
+    OutlineColor                 WHITE
+    Pattern                      Solid
+    Top                          140
+    Width                        290
+end
+StaticText
+    Name                         Statictext5
+    Alias                        Statictext5
+    AutoSize                     Yes
+    Caption                      D4
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    18
+    Font.Style                   []
+    Height                       25
+    Left                         6
+    Top                          112
+    Transparent                  Yes
+    Width                        22
+    WordWrap                     Yes
+end
+StaticText
+    Name                         Statictext6
+    Alias                        Statictext6
+    AutoSize                     Yes
+    Caption                      CF
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    18
+    Font.Style                   []
+    Height                       25
+    Left                         6
+    Top                          88
+    Transparent                  Yes
+    Width                        20
+    WordWrap                     Yes
+end
+StaticText
+    Name                         Statictext7
+    Alias                        Statictext7
+    AutoSize                     Yes
+    Caption                      CF
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    18
+    Font.Style                   []
+    Height                       25
+    Left                         6
+    Top                          160
+    Transparent                  Yes
+    Width                        20
+    WordWrap                     Yes
+end
+StaticText
+    Name                         Statictext8
+    Alias                        Statictext8
+    AutoSize                     Yes
+    Caption                      CF
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    Digital-7
+    Font.Size                    18
+    Font.Style                   []
+    Height                       25
+    Left                         6
+    Top                          136
+    Transparent                  Yes
+    Width                        20
+    WordWrap                     Yes
+end
+StaticText
+    Name                         Statictext9
+    Alias                        Statictext9
+    AutoSize                     Yes
+    Caption                      TSense
+    Color                        WHITE
+    Font.Color                   WHITE
+    Font.Effects                 []
+    Font.Name                    'Century Gothic'
+    Font.Size                    28
+    Font.Style                   []
+    Height                       44
+    Left                         104
+    Top                          0
+    Transparent                  Yes
+    Width                        118
+    WordWrap                     Yes
+end

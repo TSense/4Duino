@@ -1,3 +1,4 @@
+  Display.img_Show(hndl,iStatictext1) ;  // lbl_temp
 // Define LOG_MESSAGES to a serial port to send SPE errors messages to. Do not use the same Serial port as SPE
 #define LOG_MESSAGES Serial
 

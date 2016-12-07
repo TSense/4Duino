@@ -1,4 +1,4 @@
-// File generated 12/5/2016 10:56:08 PM
+// File generated 12/7/2016 1:06:25 AM
 // Warning! This is a generated file, any manual changes will be
 // lost during the next generation.
 
@@ -9,4 +9,5 @@
 #endif
 
 // object indexes into ImageControl
+#define iImage1 0         // offset 0x0
 
