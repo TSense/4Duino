@@ -40,7 +40,6 @@ void respond() {
   s += temp;
   s += ";";
   s += hum;
-  s += ";";
   server.send(200, "text/html", s); // Send response as html for library bug purpose
 }
 
