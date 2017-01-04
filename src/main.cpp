@@ -11,12 +11,12 @@
 #define TEMP_LED 0
 
 // Set default configs that will be changed at the first request (as defined in respond())
-float hum = 0;
+float hum = 1;
 float humLow = 0;
 float humHigh = 100;
-float temp = 0;
-float tempLow = 10;
-float tempHigh = 30;
+float temp = 1;
+float tempLow = 0;
+float tempHigh = 100;
 
 BME280 tempSensor;
 
