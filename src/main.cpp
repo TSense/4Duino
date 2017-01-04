@@ -47,7 +47,7 @@ void setup() {
   // Setup Warning Leds
   pinMode(HUM_LED, OUTPUT);
   pinMode(TEMP_LED, OUTPUT);
-  digitalWrite(HUM_LED, LOW);
+  digitalWrite(HUM_LED, HIGH);
   digitalWrite(TEMP_LED, LOW);
 
   tempSensor.settings.commInterface = I2C_MODE;
@@ -63,7 +63,9 @@ void setup() {
 
   WiFi.begin(SSID, PASS);                 // Sets Wifi credentials
   while (WiFi.status() != WL_CONNECTED) { // Try to connect until it does
-    delay(10);
+    digitalWrite(HUM_LED, !digitalRead(HUM_LED));
+    digitalWrite(TEMP_LED, !digitalRead(TEMP_LED));
+    delay(300);
   }
   server.on("/", respond); // Listen for HTTP/GET requests to respond appropriately
   server.begin();     // Start web server
