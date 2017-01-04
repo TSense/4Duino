@@ -7,8 +7,8 @@
 #define SSID "SSID"
 #define PASS "PASS"
 
-#define HUM_LED 1
-#define TEMP_LED 14
+#define HUM_LED 2
+#define TEMP_LED 0
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 0;
