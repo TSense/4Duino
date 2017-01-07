@@ -3,6 +3,7 @@
 #include "SPI.h"
 #include "SparkFunBME280.h"
 #include "Wire.h"
+#include "LiquidCrystal_I2C.h"
 
 #define SSID "SSID"
 #define PASS "PASS"
@@ -21,6 +22,21 @@ float tempHigh = 100;
 BME280 tempSensor;
 
 ESP8266WebServer server(7568); // Define port 80 for the web server port
+
+LiquidCrystal_I2C lcd(0x3F, 16, 2);
+
+uint8_t backslash[8] = {
+    0b00000,
+    0b10000,
+    0b01000,
+    0b00100,
+    0b00010,
+    0b00001,
+    0b00000,
+    0b00000
+};
+
+int state = 0;
 
 void respond() {
   // Gets configs from the GET request
@@ -44,10 +60,20 @@ void respond() {
 }
 
 void setup() {
+  // LCD
+  lcd.init();
+  lcd.backlight();
+  lcd.createChar(0, backslash);
+  lcd.clear();
+  lcd.setCursor(0,0); //Start at character 0 on line 0
+  lcd.print(" Brought you by  ");  //Welcome Msg
+  lcd.setCursor(0,1); //Start at character 0 on line 0
+  lcd.print("    TSense     ");
+
   // Setup Warning Leds
   pinMode(HUM_LED, OUTPUT);
   pinMode(TEMP_LED, OUTPUT);
-  digitalWrite(HUM_LED, HIGH);
+  digitalWrite(HUM_LED, LOW);
   digitalWrite(TEMP_LED, LOW);
 
   tempSensor.settings.commInterface = I2C_MODE;
@@ -61,21 +87,79 @@ void setup() {
 
   tempSensor.begin();
 
-  WiFi.begin(SSID, PASS);                 // Sets Wifi credentials
+  delay(2000);
+
+  WiFi.begin(SSID, PASS); // Sets Wifi credentials
+  lcd.clear();  //clear the LCD
+  lcd.print("   Connecting   ");
+  int state = 0;
   while (WiFi.status() != WL_CONNECTED) { // Try to connect until it does
-    digitalWrite(HUM_LED, !digitalRead(HUM_LED));
-    digitalWrite(TEMP_LED, !digitalRead(TEMP_LED));
-    delay(300);
+    lcd.setCursor(7,1); //Start at character 0 on line 0
+    switch(state){
+      case 0:
+      lcd.print("-");
+      break;
+      case 1:
+      lcd.write(0);
+      break;
+      case 2:
+      lcd.print("|");
+      break;
+      case 3:
+      lcd.print("/");
+      break;
+    }
+    if(state < 3) state++;
+    else state = 0;
+    delay(400);
   }
+  lcd.clear();
+  lcd.setCursor(0,0); //Start at character 0 on line 0
+  lcd.print("   WiFi Found   ");  //Welcome Msg
+  lcd.setCursor(2,1); //Start at character 0 on line 0
+  lcd.print(WiFi.localIP());
+
   server.on("/", respond); // Listen for HTTP/GET requests to respond appropriately
   server.begin();     // Start web server
+  delay(1000);
+  lcd.clear();
+  lcd.setCursor(2,0);
+  lcd.print("Tempe");
+  lcd.setCursor(9,0);
+  lcd.print("Humid");
 }
 
 void loop() {
-  server.handleClient(); // Makes sure to reconnect if wifi fails
+  server.handleClient();
+  lcd.setCursor(15, 0);
+  if(WiFi.status() != WL_CONNECTED){
+    switch(state){
+      case 0:
+      lcd.print("-");
+      break;
+      case 1:
+      lcd.write(0);
+      break;
+      case 2:
+      lcd.print("|");
+      break;
+      case 3:
+      lcd.print("/");
+      break;
+    }
+    if(state < 3) state++;
+    else state = 0;
+  } else{
+    lcd.print(" ");
+  }
 
   temp = tempSensor.readTempC();
   hum = tempSensor.readFloatHumidity();
+
+  lcd.setCursor(2,1);
+  lcd.print(temp);
+  lcd.setCursor(9,1);
+  lcd.print(hum);
 
   if (hum < humLow || hum > humHigh) {
     digitalWrite(HUM_LED, HIGH);
@@ -88,4 +172,5 @@ void loop() {
   } else {
     digitalWrite(TEMP_LED, LOW);
   }
+  delay(1000);
 }
