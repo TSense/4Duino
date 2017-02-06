@@ -6,8 +6,8 @@
 #include "LiquidCrystal_I2C.h"
 #include <SoftwareSerial.h>
 
-#define SSID "Vodafone-F543D9"
-#define PASS "038E3744D1"
+#define SSID "SSID"
+#define PASS "PASS"
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
