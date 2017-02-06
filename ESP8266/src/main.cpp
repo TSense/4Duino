@@ -80,7 +80,6 @@ void loop() {
     hum = tempSensor.readFloatHumidity();
 
     if (ESPserial.available()) {
-        String response = "";
         String message = String(ESPserial.read());
         if(message.equals("IP")){
             ESPserial.print(WiFi.localIP());
