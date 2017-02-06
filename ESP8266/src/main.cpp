@@ -21,7 +21,7 @@ BME280 tempSensor;
 
 ESP8266WebServer server(7568); // Define port 80 for the web server port
 
-SoftwareSerial ESPserial(2, 3); // RX | TX
+SoftwareSerial ESPserial(3, 1); // RX | TX
 
 LiquidCrystal_I2C lcd(0x3F, 16, 2);
 
