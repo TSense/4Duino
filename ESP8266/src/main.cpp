@@ -6,8 +6,8 @@
 #include "LiquidCrystal_I2C.h"
 #include <SoftwareSerial.h>
 
-#define SSID "SSID"
-#define PASS "PASS"
+#define SSID "ieeehotspot"
+#define PASS "Jk638td9og35"
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
@@ -80,9 +80,12 @@ void loop() {
     hum = tempSensor.readFloatHumidity();
 
     if (ESPserial.available()) {
+        String response = "";
         String message = String(ESPserial.read());
         if(message.equals("IP")){
-            ESPserial.print(WiFi.localIP());
+            //response += WiFi.localIP();
+            //response += ";";
+            ESPserial.println("lalala");
         } else if (message.equals("READ")){
             ESPserial.print(String(temp) + ";" + String(hum));
         }
