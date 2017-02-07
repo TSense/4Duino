@@ -2,7 +2,6 @@
 #include "UTFT.h"
 
 extern uint8_t BigFont[];
-extern uint8_t SevenSegNumFont[];
 
 UTFT myGLCD(ITDB32S, 38, 39, 40, 41);
 
@@ -11,15 +10,14 @@ void setup() {
     myGLCD.InitLCD();
     myGLCD.clrScr();
     myGLCD.setFont(BigFont);
-    Serial1.write("IP");
-    delay(100);
-    myGLCD.setFont(SevenSegNumFont);
-    myGLCD.setColor(0, 255, 0);
-    myGLCD.print(Serial1.readString(), 300, 200, 180);
+    myGLCD.setColor(255, 255, 255);
+    myGLCD.print("TSense", 120, 110, 0);
+    delay(3000);
+    myGLCD.clrScr();
+
 }
 
 void loop() {
-
     if (Serial.available() > 0) {
 
     }
