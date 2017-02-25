@@ -5,7 +5,6 @@ extern uint8_t BigFont[];
 
 UTFT myGLCD(SSD1289, 38, 39, 40, 41);
 
-String temperature = "";
 
 void setup() {
     Serial1.begin(115200);
@@ -19,12 +18,10 @@ void setup() {
 }
 
 void loop() {
-    if (Serial1.available() > 0) {
-        String mac = Serial1.readStringUntil(';');
-        String temperature = Serial1.readStringUntil(';');
-        String humidity = Serial1.readStringUntil(';');
-        myGLCD.print(mac, 20, 20, 0);
-        myGLCD.print(temperature, 20, 110, 0);
-        myGLCD.print(humidity, 150, 150, 0);
-    }
+    String mac = Serial1.readStringUntil(';');
+    String temperature = Serial1.readStringUntil(';');
+    String humidity = Serial1.readStringUntil(';');
+    myGLCD.print(mac, 20, 20, 0);
+    myGLCD.print(temperature, 20, 110, 0);
+    myGLCD.print(humidity, 150, 150, 0);
 }
