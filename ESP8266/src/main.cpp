@@ -6,8 +6,6 @@
 #include <SoftwareSerial.h>
 
 #include "secrets.h" // comment these lines and uncomment the following
-//#define SSID "**********"
-//#define PASS "**********"
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
