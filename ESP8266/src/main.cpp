@@ -3,11 +3,10 @@
 #include "SPI.h"
 #include "SparkFunBME280.h"
 #include "Wire.h"
-#include "LiquidCrystal_I2C.h"
 #include <SoftwareSerial.h>
 
-#define SSID "ieeehotspot"
-#define PASS "Jk638td9og35"
+#define SSID "Vodafone-F543D9"
+#define PASS "038E3744D1"
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
@@ -20,10 +19,6 @@ float tempHigh = 100;
 BME280 tempSensor;
 
 ESP8266WebServer server(7568); // Define port 80 for the web server port
-
-SoftwareSerial ESPserial(3, 1); // RX | TX
-
-LiquidCrystal_I2C lcd(0x3F, 16, 2);
 
 void respond() {
     // Gets configs from the GET request
@@ -47,7 +42,9 @@ void respond() {
 }
 
 void setup() {
-    ESPserial.begin(115200);
+    Serial.begin(115200);
+    pinMode(BUILTIN_LED, OUTPUT);
+    digitalWrite(BUILTIN_LED, HIGH);
 
     tempSensor.settings.commInterface = I2C_MODE;
     tempSensor.settings.I2CAddress = 0x77;
@@ -66,8 +63,7 @@ void setup() {
     while (WiFi.status() != WL_CONNECTED) { // Try to connect until it does
         delay(100);
     }
-
-    Serial.print(WiFi.localIP());
+    digitalWrite(BUILTIN_LED, LOW);
 
     server.on("/", respond); // Listen for HTTP/GET requests to respond appropriately
     server.begin();     // Start web server
@@ -79,16 +75,18 @@ void loop() {
     temp = tempSensor.readTempC();
     hum = tempSensor.readFloatHumidity();
 
-    if (ESPserial.available()) {
+    if (Serial.available()) {
         String response = "";
-        String message = String(ESPserial.read());
+        String message = String(Serial.readString());
         if(message.equals("IP")){
-            //response += WiFi.localIP();
-            //response += ";";
-            ESPserial.println("lalala");
-        } else if (message.equals("READ")){
-            ESPserial.print(String(temp) + ";" + String(hum));
+            response += WiFi.localIP();
+        } else if (message.equals("TEMP")){
+            response = String(temp);
+        } else if(message.equals("TEMP")){
+            response = String(hum);
         }
+        Serial.print(response);
+        response = "";
     }
     delay(500);
 }

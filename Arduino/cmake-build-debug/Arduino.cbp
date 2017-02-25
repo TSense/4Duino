@@ -74,48 +74,30 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add option="-DF_CPU=16000000L"/>
+					<Add option="-DF_CPU=84000000L"/>
+					<Add option="-DUSBCON"/>
 					<Add option="-DPLATFORMIO=30201"/>
-					<Add option="-DARDUINO_ARCH_AVR"/>
-					<Add option="-DARDUINO_AVR_MEGA2560"/>
-					<Add option="-DARDUINO=10617"/>
-					<Add option="-D__AVR_ATmega2560__"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/cores/arduino"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/variants/mega"/>
+					<Add option="-D__SAM3X8E__"/>
+					<Add option="-DARDUINO_ARCH_SAM"/>
+					<Add option="-DARDUINO_SAM_DUE"/>
+					<Add option="-DARDUINO=10611"/>
+					<Add option="-DUSB_VID=0x2341"/>
+					<Add option="-DUSB_PID=0x003E"/>
+					<Add option="-DUSB_PRODUCT=&quot;Arduino Due&quot;"/>
+					<Add option="-DUSB_MANUFACTURER=&quot;Arduino&quot;"/>
+					<Add option="-Dprintf=iprintf"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/cores/sam"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/system/sam/libsam"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/system/sam/CMSIS/CMSIS/Include"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/system/sam/CMSIS/Device/ATMEL"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/variants/arduino_due_x"/>
 					<Add directory="C:/Users/Goncalo/Desktop/hardware/Arduino/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground/utility"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Bridge/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/EEPROM/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Esplora/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Ethernet/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Firmata"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Firmata/utility"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/GSM/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/HID/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Keyboard/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/LiquidCrystal/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Mouse/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/RobotIRremote/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Robot_Control/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Robot_Motor/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SD/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SPI/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SPI1/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Scheduler/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Servo/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SoftwareSerial/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SpacebrewYun/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Stepper/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/TFT/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Temboo/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/USBHost/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/WiFi/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Wire/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Wire1/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-atmelavr/avr/include"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include-fixed"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/libraries/__cores__/sam/HID/src"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/libraries/__cores__/sam/SPI/src"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/libraries/__cores__/sam/Wire/src"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/4.8.4/include"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/4.8.4/include-fixed"/>
 					<Add directory="d:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
 					<Add directory="d:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
 					<Add directory="d:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>
@@ -137,48 +119,30 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add option="-DF_CPU=16000000L"/>
+					<Add option="-DF_CPU=84000000L"/>
+					<Add option="-DUSBCON"/>
 					<Add option="-DPLATFORMIO=30201"/>
-					<Add option="-DARDUINO_ARCH_AVR"/>
-					<Add option="-DARDUINO_AVR_MEGA2560"/>
-					<Add option="-DARDUINO=10617"/>
-					<Add option="-D__AVR_ATmega2560__"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/cores/arduino"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/variants/mega"/>
+					<Add option="-D__SAM3X8E__"/>
+					<Add option="-DARDUINO_ARCH_SAM"/>
+					<Add option="-DARDUINO_SAM_DUE"/>
+					<Add option="-DARDUINO=10611"/>
+					<Add option="-DUSB_VID=0x2341"/>
+					<Add option="-DUSB_PID=0x003E"/>
+					<Add option="-DUSB_PRODUCT=&quot;Arduino Due&quot;"/>
+					<Add option="-DUSB_MANUFACTURER=&quot;Arduino&quot;"/>
+					<Add option="-Dprintf=iprintf"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/cores/sam"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/system/sam/libsam"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/system/sam/CMSIS/CMSIS/Include"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/system/sam/CMSIS/Device/ATMEL"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/variants/arduino_due_x"/>
 					<Add directory="C:/Users/Goncalo/Desktop/hardware/Arduino/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Adafruit_CircuitPlayground/utility"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Bridge/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/EEPROM/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Esplora/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Ethernet/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Firmata"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Firmata/utility"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/GSM/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/HID/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Keyboard/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/LiquidCrystal/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Mouse/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/RobotIRremote/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Robot_Control/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Robot_Motor/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SD/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SPI/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SPI1/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Scheduler/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Servo/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SoftwareSerial/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/SpacebrewYun/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Stepper/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/TFT/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Temboo/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/USBHost/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/WiFi/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Wire/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinoavr/libraries/Wire1/src"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-atmelavr/avr/include"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include"/>
-					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/4.9.2/include-fixed"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/libraries/__cores__/sam/HID/src"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/libraries/__cores__/sam/SPI/src"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/framework-arduinosam/libraries/__cores__/sam/Wire/src"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-gccarmnoneeabi/arm-none-eabi/include"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/4.8.4/include"/>
+					<Add directory="C:/Users/Goncalo/.platformio/packages/toolchain-gccarmnoneeabi/lib/gcc/arm-none-eabi/4.8.4/include-fixed"/>
 					<Add directory="d:\mingw\bin\../lib/gcc/mingw32/5.3.0/include"/>
 					<Add directory="d:\mingw\bin\../lib/gcc/mingw32/5.3.0/../../../../include"/>
 					<Add directory="d:\mingw\bin\../lib/gcc/mingw32/5.3.0/include-fixed"/>

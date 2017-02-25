@@ -60,15 +60,15 @@ CMakeFiles/Arduino.dir/src/main.cpp.obj: CMakeFiles/Arduino.dir/flags.make
 CMakeFiles/Arduino.dir/src/main.cpp.obj: CMakeFiles/Arduino.dir/includes_CXX.rsp
 CMakeFiles/Arduino.dir/src/main.cpp.obj: ../src/main.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Goncalo\Desktop\hardware\Arduino\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/Arduino.dir/src/main.cpp.obj"
-	C:\Users\Goncalo\.platformio\packages\toolchain-atmelavr\bin\avr-g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Arduino.dir\src\main.cpp.obj -c C:\Users\Goncalo\Desktop\hardware\Arduino\src\main.cpp
+	C:\Users\Goncalo\.platformio\packages\toolchain-gccarmnoneeabi\bin\arm-none-eabi-g++.exe   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\Arduino.dir\src\main.cpp.obj -c C:\Users\Goncalo\Desktop\hardware\Arduino\src\main.cpp
 
 CMakeFiles/Arduino.dir/src/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Arduino.dir/src/main.cpp.i"
-	C:\Users\Goncalo\.platformio\packages\toolchain-atmelavr\bin\avr-g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Goncalo\Desktop\hardware\Arduino\src\main.cpp > CMakeFiles\Arduino.dir\src\main.cpp.i
+	C:\Users\Goncalo\.platformio\packages\toolchain-gccarmnoneeabi\bin\arm-none-eabi-g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Goncalo\Desktop\hardware\Arduino\src\main.cpp > CMakeFiles\Arduino.dir\src\main.cpp.i
 
 CMakeFiles/Arduino.dir/src/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Arduino.dir/src/main.cpp.s"
-	C:\Users\Goncalo\.platformio\packages\toolchain-atmelavr\bin\avr-g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Goncalo\Desktop\hardware\Arduino\src\main.cpp -o CMakeFiles\Arduino.dir\src\main.cpp.s
+	C:\Users\Goncalo\.platformio\packages\toolchain-gccarmnoneeabi\bin\arm-none-eabi-g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Goncalo\Desktop\hardware\Arduino\src\main.cpp -o CMakeFiles\Arduino.dir\src\main.cpp.s
 
 CMakeFiles/Arduino.dir/src/main.cpp.obj.requires:
 

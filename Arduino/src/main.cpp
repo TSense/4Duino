@@ -3,7 +3,9 @@
 
 extern uint8_t BigFont[];
 
-UTFT myGLCD(ITDB32S, 38, 39, 40, 41);
+UTFT myGLCD(SSD1289, 38, 39, 40, 41);
+
+String temperature = "";
 
 void setup() {
     Serial1.begin(115200);
@@ -14,12 +16,18 @@ void setup() {
     myGLCD.print("TSense", 120, 110, 0);
     delay(3000);
     myGLCD.clrScr();
-
+    if (Serial1.available() > 0) {
+        Serial1.print("IP");
+        delay(2000);
+        myGLCD.print(Serial.readString(), 20, 20, 0);
+    }
 }
 
 void loop() {
-    if (Serial.available() > 0) {
-
+    if (Serial1.available() > 0) {
+        Serial1.print("TEMP");
+        delay(2000);
+        temperature = Serial1.readString();
+        myGLCD.print(temperature, 120, 110, 0);
     }
-    delay(1000);
 }
