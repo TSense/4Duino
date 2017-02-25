@@ -20,10 +20,10 @@ void setup() {
 
 void loop() {
     if (Serial1.available() > 0) {
-        String IP = Serial1.readStringUntil(';');
+        String mac = Serial1.readStringUntil(';');
         String temperature = Serial1.readStringUntil(';');
         String humidity = Serial1.readStringUntil(';');
-        myGLCD.print(IP, 20, 20, 0);
+        myGLCD.print(mac, 20, 20, 0);
         myGLCD.print(temperature, 20, 110, 0);
         myGLCD.print(humidity, 150, 150, 0);
     }
