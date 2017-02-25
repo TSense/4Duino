@@ -243,6 +243,9 @@
 		<Unit filename="C:/Users/Goncalo/Desktop/hardware/ESP8266/src/main.cpp">
 			<Option target="ESP8266"/>
 		</Unit>
+		<Unit filename="C:/Users/Goncalo/Desktop/hardware/ESP8266/src/secrets.h">
+			<Option target="ESP8266"/>
+		</Unit>
 		<Unit filename="C:/Users/Goncalo/Desktop/hardware/ESP8266/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
