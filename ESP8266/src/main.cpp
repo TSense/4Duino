@@ -5,8 +5,8 @@
 #include "Wire.h"
 #include <SoftwareSerial.h>
 
-#define SSID "SSID"
-#define PASS "PASS"
+#define SSID "Vodafone-F543D9"
+#define PASS "038E3744D1"
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
@@ -38,6 +38,7 @@ void respond() {
     s += temp;
     s += ";";
     s += hum;
+    s += ";";
     server.send(200, "text/html", s); // Send response as html for library bug purpose
 }
 
@@ -76,17 +77,15 @@ void loop() {
     hum = tempSensor.readFloatHumidity();
 
     if (Serial.available()) {
-        String response = "";
-        String message = String(Serial.readString());
-        if(message.equals("IP")){
-            response += WiFi.localIP();
-        } else if (message.equals("TEMP")){
-            response = String(temp);
-        } else if(message.equals("TEMP")){
-            response = String(hum);
-        }
-        Serial.print(response);
-        response = "";
+        // Cooks response
+        String s = "";
+        s += WiFi.macAddress();
+        s += ";";
+        s += temp;
+        s += ";";
+        s += hum;
+        Serial.print(s);
+        s = "";
     }
     delay(500);
 }

@@ -14,20 +14,17 @@ void setup() {
     myGLCD.setFont(BigFont);
     myGLCD.setColor(255, 255, 255);
     myGLCD.print("TSense", 120, 110, 0);
-    delay(3000);
+    delay(1500);
     myGLCD.clrScr();
-    if (Serial1.available() > 0) {
-        Serial1.print("IP");
-        delay(2000);
-        myGLCD.print(Serial.readString(), 20, 20, 0);
-    }
 }
 
 void loop() {
     if (Serial1.available() > 0) {
-        Serial1.print("TEMP");
-        delay(2000);
-        temperature = Serial1.readString();
-        myGLCD.print(temperature, 120, 110, 0);
+        String IP = Serial1.readStringUntil(';');
+        String temperature = Serial1.readStringUntil(';');
+        String humidity = Serial1.readStringUntil(';');
+        myGLCD.print(IP, 20, 20, 0);
+        myGLCD.print(temperature, 20, 110, 0);
+        myGLCD.print(humidity, 150, 150, 0);
     }
 }
