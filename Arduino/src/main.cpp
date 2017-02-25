@@ -2,8 +2,9 @@
 #include "UTFT.h"
 
 extern uint8_t BigFont[];
+extern uint8_t SevenSegNumFontPlusPlus[];
 
-UTFT myGLCD(SSD1289, 38, 39, 40, 41);
+UTFT myGLCD(ITDB32S, 38, 39, 40, 41);
 
 
 void setup() {
@@ -21,7 +22,9 @@ void loop() {
     String mac = Serial1.readStringUntil(';');
     String temperature = Serial1.readStringUntil(';');
     String humidity = Serial1.readStringUntil(';');
+    myGLCD.setFont(BigFont);
     myGLCD.print(mac, 20, 20, 0);
-    myGLCD.print(temperature, 20, 110, 0);
-    myGLCD.print(humidity, 150, 150, 0);
+    myGLCD.setFont(SevenSegNumFontPlusPlus);
+    myGLCD.print(temperature, 20, 50, 0);
+    myGLCD.print(humidity, 20, 150, 0);
 }
