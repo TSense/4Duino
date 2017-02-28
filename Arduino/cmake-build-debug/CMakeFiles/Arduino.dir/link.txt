@@ -1,3 +1,0 @@
-"C:\Program Files (x86)\JetBrains\CLion 2016.3.2\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\Arduino.dir/objects.a
-D:\MinGW\bin\ar.exe cr CMakeFiles\Arduino.dir/objects.a @CMakeFiles\Arduino.dir\objects1.rsp
-C:\Users\Goncalo\.platformio\packages\toolchain-gccarmnoneeabi\bin\arm-none-eabi-g++.exe  -g   -Wl,--whole-archive CMakeFiles\Arduino.dir/objects.a -Wl,--no-whole-archive  -o Arduino.exe -Wl,--out-implib,libArduino.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Arduino.dir\linklibs.rsp

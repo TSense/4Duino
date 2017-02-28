@@ -74,14 +74,4 @@ void loop() {
 
     temp = tempSensor.readTempC();
     hum = tempSensor.readFloatHumidity();
-    // Cooks response
-    String s = "";
-    s += WiFi.macAddress();
-    s += ";";
-    s += temp;
-    s += ";";
-    s += hum;
-    Serial.print(s);
-    s = "";
-    delay(500);
 }
