@@ -104,7 +104,7 @@ void loop() {
         int len = Udp.read(incomingPacket, 255);
         if (len > 0)
         {
-        incomingPacket[len] = 0;
+            incomingPacket[len] = 0;
         }
         Serial.printf("UDP packet contents: %s\n", incomingPacket);
 
