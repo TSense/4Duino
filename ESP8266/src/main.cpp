@@ -4,7 +4,6 @@
 #include "SPI.h"
 #include "SparkFunBME280.h"
 #include "Wire.h"
-#include <SoftwareSerial.h>
 
 char ssid[] = "ieeehotspot";        //  your network SSID (name)
 char pass[] = "Jk638td9og35";       // your network password
