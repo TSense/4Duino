@@ -5,7 +5,9 @@
 #include "SparkFunBME280.h"
 #include "Wire.h"
 #include "md5.h"
-#include "secrets.h"
+
+#define ssid ""
+#define pass ""
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
@@ -130,7 +132,26 @@ void loop() {
       incomingPacket[len] = 0;
     }
 
+    char ip[20];
+    strcpy(ip, Udp.remoteIP().toString().c_str());
+    char aux[4];
     String responseBuffer(incomingPacket);
+    {
+      int i=strlen(ip);
+      while(ip[i]!='.'){
+        i--;
+      }
+      strncpy(aux, ip+i, 3);
+      Serial.println("IP: "+ip);
+    }
+    
+    {
+      for(int i=0;i<strlen(aux);i++){
+          responseBuffer[i+8]=aux[i];
+        }
+        Serial.println("After insering IP: "+responseBuffer);
+    }
+    
 
     String auxA;
     String auxB;
@@ -168,7 +189,9 @@ void loop() {
 
     // send back a reply, to the IP address and port we got the packet from
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
-    Udp.write(response);
+    char rsp[600];
+    sprintf(rsp, "%s;%s", incomingPacket, response);
+    Udp.write(rsp);
     Udp.endPacket();
     delay(50);
     digitalWrite(D0, HIGH);
