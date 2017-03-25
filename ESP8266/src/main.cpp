@@ -133,7 +133,7 @@ void loop() {
     }
 
     char ip[20];
-    strcpy(ip, Udp.remoteIP().toString().c_str());
+    strcpy(ip, WiFi.localIP().toString().c_str());
     char aux[4];
     String responseBuffer(incomingPacket);
     {
@@ -141,8 +141,10 @@ void loop() {
       while(ip[i]!='.'){
         i--;
       }
-      strncpy(aux, ip+i, 3);
-      Serial.println("IP: "+ip);
+      i++;
+      Serial.println(i+ip);
+      strncpy(aux, ip+i, 4);
+      //Serial.println("IP: "+ip);
     }
     
     {
@@ -151,7 +153,7 @@ void loop() {
         }
         Serial.println("After insering IP: "+responseBuffer);
     }
-    
+
 
     String auxA;
     String auxB;
