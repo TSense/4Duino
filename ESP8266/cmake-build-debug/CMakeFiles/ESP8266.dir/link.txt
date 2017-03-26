@@ -1,3 +1,0 @@
-"C:\Program Files (x86)\JetBrains\CLion 2016.3.2\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\ESP8266.dir/objects.a
-D:\MinGW\bin\ar.exe cr CMakeFiles\ESP8266.dir/objects.a @CMakeFiles\ESP8266.dir\objects1.rsp
-C:\Users\Goncalo\.platformio\packages\toolchain-xtensa\bin\xtensa-lx106-elf-g++.exe  -g   -Wl,--whole-archive CMakeFiles\ESP8266.dir/objects.a -Wl,--no-whole-archive  -o ESP8266.exe -Wl,--out-implib,libESP8266.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\ESP8266.dir\linklibs.rsp
