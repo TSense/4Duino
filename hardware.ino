@@ -53,9 +53,6 @@ void respond() {
 }
 
 void setup() {
-
-
-
   pinMode(D0, OUTPUT);
   pinMode(D5, OUTPUT);
   pinMode(D6, OUTPUT);
@@ -137,21 +134,21 @@ void loop() {
     char aux[4];
     String responseBuffer(incomingPacket);
     {
-      int i=strlen(ip);
-      while(ip[i]!='.'){
+      int i = strlen(ip);
+      while (ip[i] != '.') {
         i--;
       }
       i++;
-      Serial.println(i+ip);
-      strncpy(aux, ip+i, 4);
+      Serial.println(i + ip);
+      strncpy(aux, ip + i, 4);
       //Serial.println("IP: "+ip);
     }
-    
+
     {
-      for(int i=0;i<strlen(aux);i++){
-          responseBuffer[i+8]=aux[i];
-        }
-        Serial.println("After insering IP: "+responseBuffer);
+      for (int i = 0; i < strlen(aux); i++) {
+        responseBuffer[i + 8] = aux[i];
+      }
+      Serial.println("After insering IP: " + responseBuffer);
     }
 
 
