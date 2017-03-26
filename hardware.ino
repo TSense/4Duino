@@ -5,9 +5,22 @@
 #include "SparkFunBME280.h"
 #include "Wire.h"
 #include "md5.h"
+#include "Adafruit_GFX.h"
+#include "icons.h"
+#include "Adafruit_ILI9341.h"
 
 #define ssid ""
 #define pass ""
+
+#define LCD_DC 0    //D3
+#define LCD_CS 2    //D4
+#define LCD_RST 16  //D0
+#define LCD_MOSI 14 //D5
+#define LCD_CLK 12  //D6
+#define LCD_RST 13  //D7
+#define LCD_MISO 15 //D8
+
+#define TEXT_SIZE 10
 
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
@@ -26,6 +39,8 @@ char  replyPacekt[] = "Hi there! Got the message :-)";  // a reply string to sen
 MD5Builder nonce_md5;
 
 BME280 tempSensor;
+
+Adafruit_ILI9341 lcd = Adafruit_ILI9341(LCD_CS, LCD_DC, LCD_MOSI, LCD_CLK, LCD_RST, LCD_MISO);
 
 ESP8266WebServer server(7568); // Define port 80 for the web server port
 
@@ -53,6 +68,20 @@ void respond() {
 }
 
 void setup() {
+  lcd.begin();
+  lcd.setRotation(0);
+  lcd.setTextWrap(false);
+  lcd.setTextSize(1);
+
+  lcd.fillScreen(ILI9341_BLACK);
+  lcd.setTextColor(ILI9341_WHITE, ILI9341_BLACK);
+  lcd.setCursor(200, 200);
+  lcd.println("TSense");
+  lcd.setCursor(20, 150);
+  lcd.println("Configure");
+  lcd.println("Temperature");
+  lcd.println("Sensor");
+
   pinMode(D0, OUTPUT);
   pinMode(D5, OUTPUT);
   pinMode(D6, OUTPUT);
@@ -73,6 +102,13 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
   Serial.printf("Connecting to %s ", ssid);
+
+  lcd.fillScreen(ILI9341_BLACK);
+  lcd.setCursor(200, 200);
+  lcd.println("TSense");
+  lcd.println("Connecting");
+  lcd.println("WiFi");
+  
   WiFi.begin(ssid, pass);
   int i = 0;
   while (WiFi.status() != WL_CONNECTED) { // Try to connect until it does
@@ -97,6 +133,7 @@ void setup() {
 
   Udp.begin(localUdpPort);
   Serial.printf("Now listening at IP %s, UDP port %d\n", WiFi.localIP().toString().c_str(), localUdpPort);
+  lcd.fillScreen(ILI9341_BLACK);
 }
 
 char ROT13(char source) {
@@ -112,6 +149,14 @@ void loop() {
   temp = tempSensor.readTempC();
   hum = tempSensor.readFloatHumidity();
   alt = tempSensor.readFloatAltitudeFeet();
+
+  lcd.fillScreen(ILI9341_BLACK);
+  lcd.setTextColor(ILI9341_WHITE, (temp<tempLow || temp>tempHigh)? ILI9341_RED : ILI9341_BLACK);
+  lcd.setCursor(20, 20);
+  lcd.println(temp);
+  lcd.setTextColor(ILI9341_WHITE, (hum<humLow || hum>humHigh)? ILI9341_RED : ILI9341_BLACK);
+  lcd.setCursor(100, 150);
+  lcd.println(hum);
 
   int packetSize = Udp.parsePacket();
   if (packetSize)
