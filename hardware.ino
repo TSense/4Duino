@@ -141,6 +141,27 @@ void loop() {
   temp = tempSensor.readTempC();
   hum = tempSensor.readFloatHumidity();
 
+  if (temp < -15 || temp > 60 || hum >= 100 || hum <= 0) {
+    lcd.fillScreen(ILI9341_BLACK);
+    lcd.setFont(&century32pt7b);
+    lcd.setCursor(22, 50);
+    lcd.setTextSize(1);
+    lcd.setTextColor(ILI9341_WHITE);
+    lcd.println("TSense");
+    lcd.setFont(&century32pt7b);
+    lcd.setTextColor(ILI9341_RED);
+    lcd.setCursor(5, 190);
+    lcd.println("SENSOR");
+    lcd.setCursor(20, 250);
+    lcd.println("ERROR");
+    while (temp < -15 || temp > 60 || hum >= 100 || hum <= 0) {
+      temp = tempSensor.readTempC();
+      hum = tempSensor.readFloatHumidity();
+      delay(1000);
+    }
+    ESP.reset();
+  }
+
   lcd.setTextColor(ILI9341_WHITE, temp > tempHigh ? ILI9341_RED : temp < tempLow ? ILI9341_BLUE : ILI9341_BLACK);
   lcd.setCursor(5, 125);
   lcd.println(temp);
