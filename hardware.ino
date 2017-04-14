@@ -2,7 +2,7 @@
 #include "ESP8266WiFi.h"
 #include "WiFiUdp.h"
 #include "SPI.h"
-//#include "SparkFunBME280.h"
+#include "SparkFunBME280.h"
 #include "Wire.h"
 #include "md5.h"
 #include "Adafruit_GFX.h"
@@ -10,21 +10,11 @@
 #include "Adafruit_ILI9341.h"
 #include "Fonts/FreeSans18pt7b.h"
 #include "Fonts/FreeSans24pt7b.h"
-#include "century12pt7b.h"
 #include "century18pt7b.h"
-#include "century24pt7b.h"
 #include "century32pt7b.h"
 
-#define ssid "Vodafone-F543D9"
-#define pass "038E3744D1"
-
-/*#define LCD_DC 0    //D3
-  #define LCD_CS 2    //D4
-  #define LCD_RST 16  //D0
-  #define LCD_MOSI 14 //D5
-  #define LCD_CLK 12  //D6
-  #define LCD_RST 13  //D7
-  #define LCD_MISO 15 //D8*/
+#define ssid ""
+#define pass ""
 
 #define LCD_DC 9
 #define LCD_CS D8
@@ -50,7 +40,7 @@ char incomingPacket[255];  // buffer for incoming packets
 char  replyPacekt[] = "Hi there! Got the message :-)";  // a reply string to send back
 MD5Builder nonce_md5;
 
-//BME280 tempSensor;
+BME280 tempSensor;
 
 Adafruit_ILI9341 lcd = Adafruit_ILI9341(LCD_CS, LCD_DC, LCD_MOSI, LCD_CLK, LCD_RST, LCD_MISO);
 
@@ -85,7 +75,7 @@ void setup() {
 
   lcd.fillScreen(ILI9341_BLACK);
 
-  /*tempSensor.settings.commInterface = I2C_MODE;
+  tempSensor.settings.commInterface = I2C_MODE;
     tempSensor.settings.I2CAddress = 0x77;
     tempSensor.settings.runMode = 3; // 0 = Sleep Mode, 1 or 2= Force Mode, 3 = Normal mode
     tempSensor.settings.tStandby = 0; //  0 = 0.5ms, 1 = 62.5ms, 2 = 125ms, 3 = 250ms, 4 = 500ms, 5 = 1000ms, 6 = 10ms, 7 = 20ms
@@ -94,16 +84,17 @@ void setup() {
     tempSensor.settings.pressOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
     tempSensor.settings.humidOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
 
-    tempSensor.begin();*/
+    tempSensor.begin();
     
   lcd.setCursor(22, 50);
   lcd.setTextSize(1);
   lcd.println("TSense");
-  lcd.setCursor(5, 240);
+  lcd.setCursor(20, 240);
   lcd.setTextColor(ILI9341_GREEN);
+  lcd.setFont(&century18pt7b);
   lcd.setTextSize(1);
   lcd.print("Connecting");
-  lcd.setCursor(75, 280);
+  lcd.setCursor(90, 280);
   lcd.print("WiFi");
 
   WiFi.begin(ssid, pass);
@@ -154,10 +145,10 @@ void loop() {
   temp = random(10, 30);
   hum = random(50, 95);
 
-  lcd.setTextColor(ILI9341_WHITE, (temp < tempLow || temp > tempHigh) ? ILI9341_RED : ILI9341_BLACK);
+  lcd.setTextColor(ILI9341_WHITE, temp > tempHigh ? ILI9341_RED : temp < tempLow ? ILI9341_BLUE : ILI9341_BLACK);
   lcd.setCursor(5, 125);
   lcd.println(temp);
-  lcd.setTextColor(ILI9341_WHITE, (hum < humLow || hum > humHigh) ? ILI9341_RED : ILI9341_BLACK);
+  lcd.setTextColor(ILI9341_WHITE, temp > tempHigh ? ILI9341_RED : temp < tempLow ? ILI9341_BLUE : ILI9341_BLACK);
   lcd.setCursor(5, 260);
   lcd.println(hum);
 
