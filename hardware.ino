@@ -76,16 +76,16 @@ void setup() {
   lcd.fillScreen(ILI9341_BLACK);
 
   tempSensor.settings.commInterface = I2C_MODE;
-    tempSensor.settings.I2CAddress = 0x77;
-    tempSensor.settings.runMode = 3; // 0 = Sleep Mode, 1 or 2= Force Mode, 3 = Normal mode
-    tempSensor.settings.tStandby = 0; //  0 = 0.5ms, 1 = 62.5ms, 2 = 125ms, 3 = 250ms, 4 = 500ms, 5 = 1000ms, 6 = 10ms, 7 = 20ms
-    tempSensor.settings.filter = 0; //  0 = filter off, 1 = coefficients = 2, 2 = coefficients = 4, 3 = coefficients = 8, 4 = coefficients = 16
-    tempSensor.settings.tempOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
-    tempSensor.settings.pressOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
-    tempSensor.settings.humidOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
+  tempSensor.settings.I2CAddress = 0x77;
+  tempSensor.settings.runMode = 3; // 0 = Sleep Mode, 1 or 2= Force Mode, 3 = Normal mode
+  tempSensor.settings.tStandby = 0; //  0 = 0.5ms, 1 = 62.5ms, 2 = 125ms, 3 = 250ms, 4 = 500ms, 5 = 1000ms, 6 = 10ms, 7 = 20ms
+  tempSensor.settings.filter = 0; //  0 = filter off, 1 = coefficients = 2, 2 = coefficients = 4, 3 = coefficients = 8, 4 = coefficients = 16
+  tempSensor.settings.tempOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
+  tempSensor.settings.pressOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
+  tempSensor.settings.humidOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
 
-    tempSensor.begin();
-    
+  tempSensor.begin();
+
   lcd.setCursor(22, 50);
   lcd.setTextSize(1);
   lcd.println("TSense");
@@ -138,12 +138,8 @@ char ROT13(char source) {
 void loop() {
   server.handleClient();
 
-  /*temp = tempSensor.readTempC();
-    hum = tempSensor.readFloatHumidity();
-    alt = tempSensor.readFloatAltitudeFeet();*/
-
-  temp = random(10, 30);
-  hum = random(50, 95);
+  temp = tempSensor.readTempC();
+  hum = tempSensor.readFloatHumidity();
 
   lcd.setTextColor(ILI9341_WHITE, temp > tempHigh ? ILI9341_RED : temp < tempLow ? ILI9341_BLUE : ILI9341_BLACK);
   lcd.setCursor(5, 125);
