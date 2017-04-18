@@ -85,7 +85,7 @@ void setup() {
   tempSensor.settings.humidOverSample = 1; //  1 through 5, oversampling *1, *2, *4, *8, *16 respectively (0 to skip)
 
   tempSensor.begin();
-
+  delay(2000);
   lcd.setCursor(22, 50);
   lcd.setTextSize(1);
   lcd.println("TSense");
@@ -126,13 +126,6 @@ void setup() {
   lcd.println("Humidity");
   lcd.setFont();
   lcd.setTextSize(8);
-}
-
-char ROT13(char source) {
-  if ((tolower(source) - 'a') < 14)
-    return source + 13;
-
-  return source - 13;
 }
 
 void loop() {
