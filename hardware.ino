@@ -5,19 +5,36 @@
 #include "SparkFunBME280.h"
 #include "Wire.h"
 #include "md5.h"
+#include "Adafruit_GFX.h"
+#include "icons.h"
+#include "Adafruit_ILI9341.h"
+#include "Fonts/FreeSans18pt7b.h"
+#include "Fonts/FreeSans24pt7b.h"
+#include "century18pt7b.h"
+#include "century32pt7b.h"
 
 #define ssid ""
 #define pass ""
 
+#define LED_PIN D1
+
+#define LCD_DC 9
+#define LCD_CS D8
+#define LCD_RST D3
+#define LCD_DC D7
+#define LCD_MOSI D6
+#define LCD_CLK D5
+#define LCD_MISO D4
+
+#define TEXT_SIZE 10
+
 // Set default configs that will be changed at the first request (as defined in respond())
 float hum = 1;
-float humLow = 0;
-float humHigh = 100;
+float humLow = 60;
+float humHigh = 90;
 float temp = 1;
-float tempLow = 0;
-float tempHigh = 100;
-float alt = 1;
-
+float tempLow = 15;
+float tempHigh = 25;
 
 WiFiUDP Udp;
 unsigned int localUdpPort = 4210;  // local port to listen on
@@ -26,6 +43,8 @@ char  replyPacekt[] = "Hi there! Got the message :-)";  // a reply string to sen
 MD5Builder nonce_md5;
 
 BME280 tempSensor;
+
+Adafruit_ILI9341 lcd = Adafruit_ILI9341(LCD_CS, LCD_DC, LCD_MOSI, LCD_CLK, LCD_RST, LCD_MISO);
 
 ESP8266WebServer server(7568); // Define port 80 for the web server port
 
@@ -53,10 +72,14 @@ void respond() {
 }
 
 void setup() {
-  pinMode(D0, OUTPUT);
-  pinMode(D5, OUTPUT);
-  pinMode(D6, OUTPUT);
-  pinMode(D7, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
+
+  lcd.begin();
+  lcd.setRotation(0);
+  lcd.setTextWrap(false);
+  lcd.setFont(&century32pt7b);
+
+  lcd.fillScreen(ILI9341_BLACK);
 
   tempSensor.settings.commInterface = I2C_MODE;
   tempSensor.settings.I2CAddress = 0x77;
@@ -73,17 +96,29 @@ void setup() {
   Serial.begin(115200);
   Serial.println();
   Serial.printf("Connecting to %s ", ssid);
+
+  lcd.setCursor(22, 50);
+  lcd.setTextSize(1);
+  lcd.println("TSense");
+  lcd.setCursor(20, 240);
+  lcd.setTextColor(ILI9341_GREEN);
+  lcd.setFont(&century18pt7b);
+  lcd.setTextSize(1);
+  lcd.print("Connecting");
+  lcd.setCursor(90, 280);
+  lcd.print("WiFi");
+
   WiFi.begin(ssid, pass);
   int i = 0;
-  while (WiFi.status() != WL_CONNECTED) { // Try to connect until it does
-    digitalWrite(D0, LOW);
+  while (WiFi.status() != WL_CONNECTED) {
+    digitalWrite(LED_PIN, LOW);
     delay(50);
     Serial.print(".");
-    digitalWrite(D0, HIGH);
+    digitalWrite(LED_PIN, HIGH);
     delay(50);
     i++;
     if (i > 200) {
-      digitalWrite(D0, LOW);
+      digitalWrite(LED_PIN, LOW);
       delay(1000);
       ESP.reset();
     }
@@ -104,25 +139,63 @@ char ROT13(char source) {
     return source + 13;
 
   return source - 13;
+  delay(2000);
+  lcd.fillScreen(ILI9341_BLACK);
+  lcd.setFont(&century32pt7b);
+  lcd.setCursor(22, 50);
+  lcd.setTextSize(1);
+  lcd.setTextColor(ILI9341_WHITE);
+  lcd.println("TSense");
+  lcd.setFont(&century18pt7b);
+  lcd.setCursor(12, 100);
+  lcd.println("Temperature");
+  lcd.setCursor(50, 235);
+  lcd.println("Humidity");
+  lcd.setFont();
+  lcd.setTextSize(8);
 }
 
 void loop() {
   server.handleClient();
+  digitalWrite(LED_PIN, HIGH);
 
   temp = tempSensor.readTempC();
   hum = tempSensor.readFloatHumidity();
-  alt = tempSensor.readFloatAltitudeFeet();
+
+  if (temp < -15 || temp > 60 || hum >= 100 || hum <= 0) {
+    lcd.fillScreen(ILI9341_BLACK);
+    lcd.setFont(&century32pt7b);
+    lcd.setCursor(22, 50);
+    lcd.setTextSize(1);
+    lcd.setTextColor(ILI9341_WHITE);
+    lcd.println("TSense");
+    lcd.setFont(&century32pt7b);
+    lcd.setTextColor(ILI9341_RED);
+    lcd.setCursor(5, 190);
+    lcd.println("SENSOR");
+    lcd.setCursor(20, 250);
+    lcd.println("ERROR");
+    while (temp < -15 || temp > 60 || hum >= 100 || hum <= 0) {
+      temp = tempSensor.readTempC();
+      hum = tempSensor.readFloatHumidity();
+      delay(1000);
+    }
+    ESP.reset();
+  }
+
+  lcd.setTextColor(ILI9341_WHITE, temp > tempHigh ? ILI9341_RED : temp < tempLow ? ILI9341_BLUE : ILI9341_BLACK);
+  lcd.setCursor(5, 125);
+  lcd.println(temp);
+  lcd.setTextColor(ILI9341_WHITE, temp > tempHigh ? ILI9341_RED : temp < tempLow ? ILI9341_BLUE : ILI9341_BLACK);
+  lcd.setCursor(5, 260);
+  lcd.println(hum);
 
   int packetSize = Udp.parsePacket();
   if (packetSize)
   {
-    digitalWrite(D0, LOW);
-    digitalWrite(D5, HIGH);
-    digitalWrite(D6, HIGH);
-    digitalWrite(D7, HIGH);
-
     // receive incoming UDP packets
     Serial.printf("Received %d bytes from %s, port %d\n", packetSize, Udp.remoteIP().toString().c_str(), Udp.remotePort());
+    // receive incoming UDP packets
     int len = Udp.read(incomingPacket, 255);
     if (len > 0)
     {
@@ -193,11 +266,6 @@ void loop() {
     Udp.write(rsp);
     Udp.endPacket();
     delay(50);
-    digitalWrite(D0, HIGH);
-    digitalWrite(D5, LOW);
-    digitalWrite(D6, LOW);
-    digitalWrite(D7, LOW);
   }
-
   delay(100);
 }
